@@ -24,8 +24,9 @@ mac(Key, Msg) when is_binary(Key) and is_binary(Msg) ->
   IPad = list_to_binary([X bxor 16#36 || X <- binary_to_list(Key2)]),
 
   HashIPad = sha256(<<IPad/binary, Msg/binary>>),
-  sha256(<<OPad/binary, HashIPad/binary>>). 
+  sha256(<<OPad/binary, HashIPad/binary>>).
 
+%% @doc to_hex
 binary_to_hex(Data) when is_binary(Data) ->
   leo_hex:binary_to_hex(Data).
   
