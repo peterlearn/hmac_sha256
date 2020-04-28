@@ -35,7 +35,7 @@ binary_to_hex(Data) when is_binary(Data) ->
 
 sha256(Value) ->
   Contex0 = crypto:hash_init(sha256),
-  Contex = crypto:do_hash_update(Contex0, Value),
+  Contex = crypto:hash_update(Contex0, Value),
   crypto:hash_final(Contex).
 
 pad_key(Key, BlockSize) when byte_size(Key) == BlockSize ->
