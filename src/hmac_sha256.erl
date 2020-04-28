@@ -7,7 +7,8 @@
 -include_lib("eunit/include/eunit.hrl").
 
 -export([mac/2,
-         binary_to_hex/1]).
+         binary_to_hex/1,
+        binary_to_hex2/1]).
 
 mac(Key, Msg) when is_binary(Key) and is_binary(Msg) ->
   BlockSize = 64,
@@ -29,7 +30,12 @@ mac(Key, Msg) when is_binary(Key) and is_binary(Msg) ->
 %% @doc to_hex
 binary_to_hex(Data) when is_binary(Data) ->
   leo_hex:binary_to_hex(Data).
-  
+
+%% @doc second way trans to hex
+binary_to_hex2(Data) when is_binary(Data) ->
+  <<X:256/big-unsigned-integer>> = Data,
+  Sign =lists:flatten(io_lib:format("~64.16.0b", [X])),
+  Sign.
 %%---------------------------------------------------------------------------------
 %% internal functions
 %%---------------------------------------------------------------------------------
